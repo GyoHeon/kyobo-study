@@ -1,23 +1,44 @@
-console.log("hi man");
+
 
 function render() {
   const root = document.getElementById("app");
 
-  const div = document.createElement("div");
-  div.className = "container";
 
-  div.innerHTML = `
-  <input>
-  <ul>
-    <li>1</li>
-    <li>2</li>
-    <li>3</li>
-    <li>4</li>
-    <li>5</li>
-  </ul>
+  const Container = document.createElement("div");
+  Container.className = "container";
+  
+  const InputArea = document.createElement("div");
+  InputArea.className = "input_area";
+  
+  InputArea.innerHTML = `
+    <input type="text">
+
   `;
 
-  root.appendChild(div);
+  const TodoListArea = document.createElement("div");
+  TodoListArea.className = "todo_area";
+  
+  TodoListArea.innerHTML = `
+    <ul id="InputList">
+    </ul> 
+  `
+  ;
+
+  const InputList = document.getElementById("InputList");
+
+  const InputListItem = document.createElement("li");
+  InputListItem.className = "InputListItem";
+  
+  InputListItem.innerHTML = `
+    <span>가나다라마</span> 
+  `
+  ;
+
+  
+  root.appendChild(Container);
+  Container.append(InputArea, TodoListArea);
+  TodoListArea.append(InputListItem);
+  
 }
 
 render();

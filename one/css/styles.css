@@ -1,4 +1,147 @@
-.container {
-  width: 100%;
-  background-color: cornflowerblue;
+.app {
+  width:100%;
 }
+
+.blind {
+  position: absolute;
+  clip: rect(0 0 0 0);
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+}
+
+.container {
+  display: block;
+  margin: 0 auto;
+  padding: 30px 50px;
+  width: 1200px;
+  border:1px solid #000;
+  box-sizing: border-box;
+}
+
+.container .appTitle {
+  font-size:36px;
+  line-height: 40px;
+  font-weight: 500;
+}
+
+.container .appTitleSub {
+  display: inline-block;
+  /* width:auto; */
+  padding: 4px 5px 0;
+  font-size: 18px;
+  line-height: 24px;
+  background-color: #f6bcfd;
+  color:#fff;
+}
+
+.container .inputArea {
+  margin:50px 0 30px;
+  display: flex;
+  justify-content: flex-end
+}
+
+.container .inputArea input {
+  padding: 5px;
+  font-size: 18px;
+  line-height: 24px;
+  color:#f6bcfd;
+  background-color: #fff;
+  border:2px solid #f6bcfd;
+  box-sizing: border-box;
+  cursor: pointer;
+}
+
+.container .inputArea input:hover {
+  color:#fff;
+  background-color: #f6bcfd;
+}
+
+.container .todoBox {
+  text-align: center;
+  font-size: 18px;
+  line-height: 30px;
+  width:100%;
+  height:auto;
+  display: block;
+}
+
+.container .todoBox .todoHeadWrap {
+  display: flex;
+  text-align: center;
+  height:30px;
+  font-size: 24px;
+  line-height: 50px;
+  height:50px;
+  font-weight: 700;
+  border-bottom:2px solid #000;
+  box-sizing: border-box;
+}
+
+.container .todoBox .todoHeadWrap li:nth-child(1),.container .todoBox .todoList ul li:nth-child(1) {
+  width:5%;
+  height:100%;
+}
+
+.container .todoBox .todoHeadWrap li:nth-child(2),.container .todoBox .todoList ul li:nth-child(2) {
+  width:50%;
+  height:100%;
+}
+
+.container .todoBox .todoHeadWrap li:nth-child(3),.container .todoBox .todoList ul li:nth-child(3) {
+  width:25%;
+  height:100%;
+}
+
+.container .todoBox .todoHeadWrap li:nth-child(4),.container .todoBox .todoList ul li:nth-child(4) {
+  width:10%;
+  height:100%;
+}
+
+.container .todoBox .todoHeadWrap li:nth-child(5), .container .todoBox .todoList ul li:nth-child(5) {
+  width:10%;
+  height:100%;
+}
+
+.container .todoBox .todoList ul {
+  padding:5px 0 ;
+  display: flex;
+  align-items: center;
+}
+
+
+.container .todoBox .todoList button {
+  width:25px;
+  height:25px;
+  background-color: transparent;
+  background-size: 100%;
+  background-repeat: no-repeat;
+  background-position: center;
+  border:none;
+  cursor: pointer;
+}
+
+.container .todoBox .statusTodo {
+  color:red;
+}
+
+.container .todoBox .statusProgress {
+  color:blueviolet;
+}
+
+.container .todoBox .statusComplete {
+  color:grey;
+}
+
+.container .todoBox .buttonEdit button {
+  background-image: url('../assets/edit.png');
+}
+.container .todoBox .buttonRemove button {
+  width:23%;
+  background-image: url('../assets/delete.png');
+}
+
+
+
+

@@ -1,4 +1,69 @@
+@import "reset.css";
+
 .container {
+  margin: 20px auto;
+  width: 80%;
+}
+
+.input_area {
+  margin-bottom: 20px;
+}
+
+.todo_area {
+  border: 1px solid #ccc;
+}
+
+table {
   width: 100%;
-  background-color: cornflowerblue;
+  border-collapse: collapse;
+}
+
+th, td {
+  padding: 20px;
+  text-align: center;
+}
+
+th {
+  background-color: #dce8cb;
+}
+
+tr {
+  width: 100%;
+}
+
+.number {
+  width: 5%;
+}
+
+.comment {
+  width: 50%;
+}
+
+.state {
+  width: 15%;
+}
+
+.btn_edite {
+  width: 15%;
+}
+.btn_remove {
+  width: 15%;
+}
+
+.status {
+  display: inline-block;
+  padding: 5px 10px;
+  border-radius: 5px;
+  background-color: #e6e6e6;
+}
+
+button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+[class^="btn_"] img {
+  width: 20px;
+  height: 20px;
 }

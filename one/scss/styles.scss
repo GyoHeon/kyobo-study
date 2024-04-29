@@ -1,0 +1,142 @@
+.blind {
+    position: absolute;
+    clip: rect(0 0 0 0);
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+}
+
+#app {
+    padding: 100px;
+    line-height: 1.6;
+    letter-spacing: 0.02em;
+    font-size: 16px;
+}
+
+.inner {
+    overflow: hidden;
+    width: 700px;
+}
+
+.spot h1 {
+    font-size: 50px;
+    font-weight: bold;
+}
+
+.spot p {
+    display: inline-block;
+    background-color: #FCF8E3;
+    font-size: 20px;
+}
+
+.todo_wrap {
+    margin-top: 50px;
+    text-align: right;
+}
+
+.todo_list_wrap {
+    text-align: center;
+}
+
+.button_todo_add {
+    border: 1px solid #5cb85c;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+    color: #5cb85c;
+    background-color: #fff;
+}
+
+.todo_list_wrap {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.todo_list_category {
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+    border-bottom: 2px solid #000;
+    font-weight: bold;
+    font-size: 20px;
+    align-content: center;
+
+    &>div {
+        flex-basis: 140px;
+        text-align: center;
+    }
+}
+
+.todo_list {
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+
+
+    flex-direction: column;
+}
+
+.todo_list_item {
+    display: flex;
+    width: 100%;
+    padding: 10px 0;
+    justify-content: space-around;
+    place-items: center;
+
+
+    border-bottom: 1px solid #ccc;
+
+    &>div {
+        flex-basis: 140px;
+        text-align: center;
+    }
+
+    [class ^="button"] {
+        display: inline-block;
+        width: 40px;
+        height: 40px;
+        background: yellow;
+        font-size: 16px;
+        line-height: 1.6;
+        cursor: pointer;
+    }
+
+    .button_edit {
+        background: url('../img/icon_write.png') no-repeat;
+        background-size: 20px;
+        background-position: center center;
+    }
+
+    .button_del {
+        background: url('../img/icon_bin.png') no-repeat;
+        background-size: 20px;
+        background-position: center center;
+    }
+
+}
+
+.todo_list_item .do_status {
+    .status {
+        display: inline-block;
+        padding: 0 5px;
+
+        &.todo {
+            border: 1px solid #5cb85c;
+            color: #5cb85c;
+        }
+
+        &.in_progress {
+            border: 1px solid #f0ad4e;
+            color: #f0ad4e;
+        }
+
+        &.complete {
+            border: 1px solid #5bc0de;
+            color: #5bc0de;
+        }
+    }
+}

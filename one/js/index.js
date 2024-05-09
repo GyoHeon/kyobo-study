@@ -75,6 +75,39 @@ function makeTodoItem(item, todolist_list) {
   todolist_list.appendChild(todolist_item);
 }
 
+const todoItems = [
+  {
+    Number: "24",
+    TaskName: "Buy Grocey",
+    status: "Todo",
+    statusClass: "todo",
+  },
+  {
+    Number: "25",
+    TaskName: "Send Email",
+    status: "In Progress",
+    statusClass: "inProgress",
+  },
+  {
+    Number: "28",
+    TaskName: "Finish Assignment",
+    status: "Complete",
+    statusClass: "complete",
+  },
+  {
+    Number: "30",
+    TaskName: "Bake Cake",
+    status: "Todo",
+    statusClass: "todo",
+  },
+  {
+    Number: "31",
+    TaskName: "Write Blog post",
+    status: "In Progress",
+    statusClass: "inProgressActive",
+  },
+];
+
 function render() {
   const root = document.getElementById("app");
 
@@ -99,16 +132,38 @@ function render() {
     className: "todolist_inputwrap",
   });
 
+  const todolist_form = makeElementWithClass({
+    tag: "form",
+    className: "todolist_form",
+  });
+
   const todolist_input = makeElementWithClass({
     tag: "input",
     className: "todolist_input",
     placeholder: "Add your tas",
   });
-
   const todolist_inputbtn = makeElementWithClass({
     tag: "button",
     className: "todolist_inputbtn",
     textContent: "Add Task",
+  });
+  todolist_form.appendChild(todolist_input);
+  todolist_form.appendChild(todolist_inputbtn);
+
+  todolist_form.addEventListener("submit", (e) => {
+    e.preventDefault();
+
+    const task = todolist_input.value;
+    if (task) {
+      todoItems.push({
+        Number: "31",
+        TaskName: "Write Blog post",
+        status: "In Progress",
+        statusClass: "inProgressActive",
+      });
+
+      render();
+    }
   });
 
   const todolist_list = makeElementWithClass({
@@ -157,39 +212,6 @@ function render() {
 
   todolist_list.appendChild(todolist_itemheader);
 
-  const todoItems = [
-    {
-      Number: "24",
-      TaskName: "Buy Grocey",
-      status: "Todo",
-      statusClass: "todo",
-    },
-    {
-      Number: "25",
-      TaskName: "Send Email",
-      status: "In Progress",
-      statusClass: "inProgress",
-    },
-    {
-      Number: "28",
-      TaskName: "Finish Assignment",
-      status: "Complete",
-      statusClass: "complete",
-    },
-    {
-      Number: "30",
-      TaskName: "Bake Cake",
-      status: "Todo",
-      statusClass: "todo",
-    },
-    {
-      Number: "31",
-      TaskName: "Write Blog post",
-      status: "In Progress",
-      statusClass: "inProgressActive",
-    },
-  ];
-
   todoItems.forEach((item) => {
     makeTodoItem(item, todolist_list);
   });
@@ -199,11 +221,11 @@ function render() {
   todolist_headerwrap.appendChild(todolist_subheader);
 
   todolist_wrap.appendChild(todolist_inputwrap);
-  todolist_inputwrap.appendChild(todolist_input);
-  todolist_inputwrap.appendChild(todolist_inputbtn);
+  todolist_inputwrap.appendChild(todolist_form);
 
   todolist_wrap.appendChild(todolist_list);
 
+  root.innerHTML = "";
   root.appendChild(todolist_wrap);
 }
 

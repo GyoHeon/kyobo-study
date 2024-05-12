@@ -1,55 +1,85 @@
+let todos = [];
+const ADD_MESSAGE = "Add new todo";
 
 function render() {
   const root = document.getElementById("app");
 
   const header = generateHeader();
-  const footer = generateFooter();
   const inputForm = generateInputForm();
-  const todoList = generateTodoList();
+  const addButton = generateAddButton();
+  const todoList = generateTodo();
+
 
   root.appendChild(header);
   root.appendChild(inputForm);
+  root.appendChild(addButton);
   root.appendChild(todoList);
-  root.appendChild(footer);
+
+  document.getElementById("addButton").addEventListener("click", addTodo);
+
 }
 
 function generateHeader() {
-  const header = document.createElement("header");
-  header.innerHTML = "<h1>Todo List</h1>";
+  const header = document.createElement("h1");
+  header.textContent = "Todo List";
   return header;
 }
 
-function generateFooter() {
-  const footer = document.createElement("footer");
-  footer.innerHTML = "<p>&copy; minseokchoi js-playgroud</p>";
-  return footer;
-}
-
 function generateInputForm() {
-  const inputForm = document.createElement("form");
-  inputForm.innerHTML = `
-        <input type="text" id="todoInput" placeholder="Add new todo">
-        <button type="submit">Add</button>
-    `;
+  const inputForm = document.createElement("input");
+  inputForm.id = "todoInput"
+  inputForm.value = ADD_MESSAGE;
 
   return inputForm;
 }
 
-function generateTodoList() {
-  const todoList = document.createElement("div");
-  todoList.className = "todoList";
+function generateAddButton() {
+  const addTodoButton = document.createElement("button");
+  addTodoButton.id = "addButton"
+  addTodoButton.textContent = "add";
+  return addTodoButton;
+}
 
-  todoList.innerHTML = `
-  <ul>
-    <li>1</li>
-    <li>2</li>
-    <li>3</li>
-    <li>4</li>
-    <li>5</li>
-  </ul>
-  `;
+
+function generateTodo() {
+  const todoList = document.createElement("ul");
+  todoList.id = "todoList"
+
+  todos.forEach( function(todo) {
+    const li = document.createElement("li");
+    li.textContent = todo;
+    todoList.appendChild(li);
+  });
 
   return todoList;
 }
 
+
+function renderTodo(todo) {
+  const todoList = document.getElementById("todoList");
+
+  let li = document.createElement("li");
+  li.className = "task";
+  li.textContent = todo;
+  todoList.appendChild(li);
+}
+function addTodo() {
+  const todoInput = document.getElementById("todoInput");
+  const input = todoInput.value.trim();
+
+  if (input === "") {
+    alert("할일을 입력해주세요.");
+    return;
+  }
+
+  todos.push(input);
+  renderTodo(input);
+  todoInput.value = ADD_MESSAGE;
+  alert("할일이 추가 되었습니다!");
+}
+
 render();
+
+
+
+

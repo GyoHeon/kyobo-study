@@ -1,133 +1,64 @@
-function makeTodoListWrap() {
-  const todolist_wrap = document.createElement("div");
-  todolist_wrap.className = "todolist_wrap";
+function makeElementWithClass({ tag, ...options }) {
+  const element = document.createElement(tag);
 
-  return todolist_wrap;
-}
-
-function makeTodoListHeaderWrap() {
-  const todolist_headerwrap = document.createElement("div");
-  todolist_headerwrap.className = "todolist_headerwrap";
-
-  return todolist_headerwrap;
-}
-
-function makeTodoHeader() {
-  const todolist_header = document.createElement("h1");
-  todolist_header.className = "todolist_header";
-  todolist_header.textContent = "TODO List Demo App";
-
-  return todolist_header;
-}
-
-function makeTodoListSubHeader() {
-  const todolist_subheader = document.createElement("span");
-  todolist_subheader.className = "todolist_subheader";
-  todolist_subheader.textContent = "Do it now.";
-
-  return todolist_subheader;
-}
-
-function makeInputWrapper() {
-  const todolist_inputwrap = document.createElement("div");
-  todolist_inputwrap.className = "todolist_inputwrap";
-
-  const todolist_input = document.createElement("input");
-  todolist_input.className = "todolist_input";
-  todolist_input.placeholder = "Add your task";
-
-  const todolist_inputbtn = document.createElement("button");
-  todolist_inputbtn.className = "todolist_inputbtn";
-  todolist_inputbtn.textContent = "Add Task";
-
-  todolist_inputbtn.addEventListener("click", () => {
-    alert(todolist_input.value);
+  Object.entries(options).forEach(([key, value]) => {
+    element[key] = value;
   });
 
-  todolist_inputwrap.appendChild(todolist_input);
-  todolist_inputwrap.appendChild(todolist_inputbtn);
-
-  return todolist_inputwrap;
+  return element;
 }
 
-function makeTodoList() {
-  const todolist_list = document.createElement("ul");
-  todolist_list.className = "todolist_list";
-  
-  return todolist_list;
+function makeDivWithClass({ ...options }) {
+  const div = makeElementWithClass({
+    tag: "div",
+    ...options,
+  });
 
-}
-
-function makeTodoItemHeader() {
-  const todolist_itemheader = document.createElement("li");
-  todolist_itemheader.className = "todolist_item" + " " + "todolist_itemheader";
-
-  const todolist_number = document.createElement("div");
-  todolist_number.className = "todolist_number";
-  todolist_number.textContent = "Number";
-
-  const todolist_name = document.createElement("div");
-  todolist_name.className = "todolist_name";
-  todolist_name.textContent = "TaskName";
-
-  const todolist_status = document.createElement("div");
-  todolist_status.className = "todolist_status";
-  todolist_status.textContent = "Status";
-
-  const todolist_edit = document.createElement("div");
-  todolist_edit.className = "todolist_edit";
-  todolist_edit.textContent = "Edit";
-
-  const todolist_remove = document.createElement("div");
-  todolist_remove.className = "todolist_remove";
-  todolist_remove.textContent = "Remove";
-
-  todolist_itemheader.appendChild(todolist_number);
-  todolist_itemheader.appendChild(todolist_name);
-
-  todolist_itemheader.appendChild(todolist_status);
-
-  todolist_itemheader.appendChild(todolist_edit);
-
-  todolist_itemheader.appendChild(todolist_remove);
-
-  return todolist_itemheader;
-
+  return div;
 }
 
 function makeTodoItem(item, todolist_list) {
-  const todolist_item = document.createElement("li");
-  todolist_item.className = "todolist_item";
+  const todolist_item = makeElementWithClass({
+    tag: "li",
+    className: "todolist_item",
+  });
+  const todolist_number = makeDivWithClass({
+    className: "todolist_number",
+    textContent: item.Number,
+  });
+  const todolist_name = makeDivWithClass({
+    className: "todolist_name",
+    textContent: item.TaskName,
+  });
+  const todolist_status = makeDivWithClass({
+    className: "todolist_status",
+  });
+  const todolist_statusbadge = makeDivWithClass({
+    className: "todolist_statusbadge " + item.statusClass,
+    textContent: item.status,
+  });
+  const todolist_edit = makeDivWithClass({
+    className: "todolist_edit",
+  });
 
-  const todolist_number = document.createElement("div");
-  todolist_number.className = "todolist_number";
-  todolist_number.textContent = item.Number;
-
-  const todolist_name = document.createElement("div");
-  todolist_name.className = "todolist_name";
-  todolist_name.textContent = item.TaskName;
-
-  const todolist_status = document.createElement("div");
-  todolist_status.className = "todolist_status";
-  const todolist_statusbadge = document.createElement("span");
-  todolist_statusbadge.textContent = item.status;
-  todolist_statusbadge.className = "todolist_statusbadge " + item.statusClass;
-
-  const todolist_edit = document.createElement("div");
-  todolist_edit.className = "todolist_edit";
-  const todolist_editbtn = document.createElement("button");
-  todolist_editbtn.textContent = "Edit";
-  todolist_editbtn.className = "todolist_editbtn";
+  const todolist_editbtn = makeElementWithClass({
+    tag: "button",
+    className: "todolist_editbtn",
+    textContent: "Edit",
+  });
 
   todolist_editbtn.addEventListener("click", () => {
     alert("Edit Clicked");
   });
 
-  const todolist_remove = document.createElement("div");
-  todolist_remove.className = "todolist_remove";
-  const todolist_removebtn = document.createElement("button");
-  todolist_removebtn.textContent = "Remove";
-  todolist_removebtn.className = "todolist_removebtn";
+  const todolist_remove = makeDivWithClass({
+    className: "todolist_remove",
+  });
+  const todolist_removebtn = makeElementWithClass({
+    tag: "button",
+    className: "todolist_removebtn",
+    textContent: "Remove",
+  });
 
   todolist_item.appendChild(todolist_number);
   todolist_item.appendChild(todolist_name);
@@ -142,7 +73,6 @@ function makeTodoItem(item, todolist_list) {
   todolist_remove.appendChild(todolist_removebtn);
 
   todolist_list.appendChild(todolist_item);
-  return todolist_item;
 }
 
 const todoItems = [
@@ -178,34 +108,132 @@ const todoItems = [
   },
 ];
 
+function updateTodoList(todoItems, todolist_list) {
+  todolist_list.innerHTML = "";
+  todoItems.forEach((item) => {
+    makeTodoItem(item, todolist_list);
+  });
+}
+
 function render() {
   const root = document.getElementById("app");
 
-  const todolist_wrap = makeTodoListWrap();
-  
-  const todolist_headerwrap = makeTodoListHeaderWrap();
-  const todolist_header = makeTodoHeader();
-  const todolist_subheader = makeTodoListSubHeader();
+  const todolist_wrap = makeDivWithClass({
+    className: "todolist_wrap",
+  });
+  const todolist_headerwrap = makeDivWithClass({
+    className: "todolist_headerwrap",
+  });
+  const todolist_header = makeElementWithClass({
+    tag: "h1",
+    className: "todolist_header",
+    textContent: "TODO List Demo App",
+  });
+  const todolist_subheader = makeElementWithClass({
+    tag: "span",
+    className: "todolist_subheader",
+    textContent: "Do it now.",
+  });
 
-  const todolist_inputwrap = makeInputWrapper();
+  const todolist_inputwrap = makeDivWithClass({
+    className: "todolist_inputwrap",
+  });
 
-  const todolist_list = makeTodoList();
-  const todolist_itemheader = makeTodoItemHeader();
+  const todolist_form = makeElementWithClass({
+    tag: "form",
+    className: "todolist_form",
+  });
 
-  
+  const todolist_input = makeElementWithClass({
+    tag: "input",
+    className: "todolist_input",
+    placeholder: "Add your tas",
+  });
+  const todolist_inputbtn = makeElementWithClass({
+    tag: "button",
+    className: "todolist_inputbtn",
+    textContent: "Add Task",
+  });
+  todolist_form.appendChild(todolist_input);
+  todolist_form.appendChild(todolist_inputbtn);
+
+  todolist_form.addEventListener("submit", (e) => {
+    e.preventDefault();
+
+    const task = todolist_input.value;
+    if (task) {
+      const newItem = {
+        Number: "31",
+        TaskName: "Write Blog post",
+        status: "In Progress",
+        statusClass: "inProgressActive",
+      };
+      
+      todoItems.push(newItem); 
+      updateTodoList(todoItems, todolist_list);
+    }
+  });
+
+  const todolist_list = makeElementWithClass({
+    tag: "ul",
+    className: "todolist_list",
+  });
+
+  const todolist_itemheader = makeElementWithClass({
+    tag: "li",
+    className: "todolist_item todolist_itemheader",
+  });
+
+  const todolist_number = makeDivWithClass({
+    className: "todolist_number",
+    textContent: "Number",
+  });
+
+  const todolist_name = makeDivWithClass({
+    className: "todolist_name",
+    textContent: "TaskName",
+  });
+
+  const todolist_status = makeDivWithClass({
+    className: "todolist_status",
+    textContent: "Status",
+  });
+
+  const todolist_edit = makeDivWithClass({
+    className: "todolist_edit",
+    textContent: "Edit",
+  });
+
+  const todolist_remove = makeDivWithClass({
+    className: "todolist_remove",
+    textContent: "Remove",
+  });
+
+  todolist_itemheader.appendChild(todolist_number);
+  todolist_itemheader.appendChild(todolist_name);
+
+  todolist_itemheader.appendChild(todolist_status);
+
+  todolist_itemheader.appendChild(todolist_edit);
+
+  todolist_itemheader.appendChild(todolist_remove);
+
+  todolist_list.appendChild(todolist_itemheader);
+
+  todoItems.forEach((item) => {
+    makeTodoItem(item, todolist_list);
+  });
+
   todolist_wrap.appendChild(todolist_headerwrap);
   todolist_headerwrap.appendChild(todolist_header);
   todolist_headerwrap.appendChild(todolist_subheader);
 
   todolist_wrap.appendChild(todolist_inputwrap);
+  todolist_inputwrap.appendChild(todolist_form);
 
   todolist_wrap.appendChild(todolist_list);
-  todolist_list.appendChild(todolist_itemheader);
-  
-  todoItems.forEach((item) => {
-    makeTodoItem(item, todolist_list);
-  });
 
+  root.innerHTML = "";
   root.appendChild(todolist_wrap);
 }
 

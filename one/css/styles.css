@@ -153,3 +153,10 @@
   background-size: cover;
   cursor: pointer;
 }
+
+.todolist_form{
+  width: 100%;
+  display: flex;
+  gap: 10px;
+
+}

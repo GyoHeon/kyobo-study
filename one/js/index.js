@@ -1,104 +1,89 @@
-// container
-function makeContainer() {
-  const container = document.createElement("div");
-  container.className = "container";
-  return container;
+// 태그 생성 함수 
+function createElementWithClass({ tag, ...options }) {
+  const element = document.createElement(tag);
+
+  Object.entries(options).forEach(([key, value]) => {
+    element[key] = value;
+  });
+
+  return element;
 }
 
-// header_wrap
-function makeHeaderWrap() {
-  const headerWrap = document.createElement("div");
-  headerWrap.className = "header_wrap";
-  return headerWrap;
-}
-function makeHeaderTitle() {
-  const headerTitle = document.createElement("h1");
-  headerTitle.className = "header_title";
-  headerTitle.textContent = "TODO List Demo App";
-  return headerTitle;
-}
-function makeHeaderSubText() {
-  const headerSubText = document.createElement("h1");
-  headerSubText.className = "header_sub_text";
-  headerSubText.textContent = "Do it now.";
-  return headerSubText;
+function createDivWithClass({ ...options }) {
+  const div = createElementWithClass({
+    tag: "div",
+    ...options,
+  });
+
+  return div;
 }
 
 
-// contents_wrap
-function makeContentsWrap() {
-  const contentsWrap = document.createElement("div");
-  contentsWrap.className = "contents_wrap";
-  return contentsWrap;
-}
-
-// input area
-function makeInputArea() {
-  const inputArea = document.createElement("div");
-  inputArea.className = "input_area";
-  return inputArea;
-}
-function makeInputText() {
-  const inputText = document.createElement("input");
-  inputText.className = "input_text";
-  return inputText;
-}
-function makeSubmitButton() {
-  const submitButton = document.createElement("button");
-  submitButton.className = "btn_submit";
-  submitButton.textContent = "Add Task";
-  return submitButton;
-}
-
-// todoList area
-function makeTodoListArea() {
-  const todoListArea = document.createElement("div");
-  todoListArea.className = "todo_list_area";
-  return todoListArea;
-}
-
-function makeTodoListBox() {
-  const todoListBox = document.createElement("table");
-  todoListBox.className = "todo_list_box";
-  return todoListBox;
-}
+ //constant
+ const statuseClassArr = [
+  {
+    classNameTag: "todo",
+    classText: "Todo"
+    
+  },
+  {
+    classNameTag: "inProgress",
+    classText: "In Progress"
+  },
+  {
+    classNameTag: "inProgressActive",
+    classText: "In Progress"
+  },
+  {
+    classNameTag: "complete",
+    classText: "Complete"
+  }
+];
 
 // table Header
 function makeTableHeader() {
-  const tableHeader = document.createElement("thead");
-  const tableHeaderRow = document.createElement("tr");
+  const tableHeader = createElementWithClass({
+    tag: "thead",
+  });
+  const tableHeaderRow = createElementWithClass({
+    tag: "tr",
+  });
 
-  const numberHeader = document.createElement("th");
-  numberHeader.className = "number";
-  numberHeader.textContent = "#";
+  const numberHeader = createElementWithClass({
+    tag: "th",
+    className : "number",
+    textContent : "#"
+  });
+  
+  const commentHeader = createElementWithClass({
+    tag: "th",
+    className : "comment",
+    textContent : "TaskName"
+  });
 
-  const commentHeader = document.createElement("th");
-  commentHeader.className = "comment";
-  commentHeader.textContent = "TaskName";
-
-  const stateHeader = document.createElement("th");
-  stateHeader.className = "state";
-  stateHeader.textContent = "Status";
-
-  const editHeader = document.createElement("th");
-  editHeader.className = "btn_edit";
-  editHeader.textContent = "Edit";
-
-  const removeHeader = document.createElement("th");
-  removeHeader.className = "btn_remove";
-  removeHeader.textContent = "Remove";
-
+  const stateHeader = createElementWithClass({
+    tag: "th",
+    className : "state",
+    textContent : "Status"
+  });
+  
+  const editHeader = createElementWithClass({
+    tag: "th",
+    className : "btn_edit",
+    textContent : "Edit"
+  });
+  
+  const removeHeader = createElementWithClass({
+    tag: "th",
+    className : "btn_remove",
+    textContent : "Remove"
+  });
   tableHeaderRow.append(numberHeader, commentHeader, stateHeader, editHeader, removeHeader);
   tableHeader.appendChild(tableHeaderRow);
 
   return tableHeader;
 }
 
-//table Body
-function makeTableBody() {
-  const tableBody = document.createElement("tbody");
-  return tableBody;
-}
 
 //todo item
 function makeTodoItemRow(item) {
@@ -106,31 +91,58 @@ function makeTodoItemRow(item) {
   const todoItemRow = document.createElement("tr");
   todoItemRow.classList.add("input_list_item");
 
-  const numberCell = document.createElement("td");
-  numberCell.classList.add("number");
-  numberCell.textContent = item.Number;
+  const numberCell = createElementWithClass({
+    tag: "td",
+    className : "number",
+    textContent : item.Number
+  });
 
-  const commentCell = document.createElement("td");
-  commentCell.classList.add("comment");
-  commentCell.textContent = item.TaskName;
+  const commentCell  = createElementWithClass({
+    tag: "td",
+    className : "comment",
+    textContent : item.TaskName
+  });
 
-  const stateCell = document.createElement("td");
-  stateCell.classList.add("state", item.statusClass);
+  const stateCell = createElementWithClass({
+    tag: "td",
+    className : `state ${statuseClassArr[0].classNameTag}`,
+  });
 
-  const stateButton = document.createElement("button");
-  stateButton.textContent = item.status;
+  const stateButton = createElementWithClass({
+    tag: "button",
+    textContent : `${statuseClassArr[0].classText}`,
+  });
+
+  let currentIndex = 0;
+  stateButton.addEventListener("click", () => {
+    
+    currentIndex = currentIndex < 3 ? currentIndex + 1 : 0;
+   
+    stateCell.className = `state ${statuseClassArr[currentIndex].classNameTag}`;
+    stateButton.textContent = `${statuseClassArr[currentIndex].classText}`;
+  });
+
+  const editCell = createElementWithClass({
+    tag: "td",
+    className : "btn_edit",
+  });
+
+  const editButton =  createElementWithClass({
+    tag: "button",
+  });
+  
+  const removeCell = createElementWithClass({
+    tag: "td",
+    className : "btn_remove",
+  });
+
+  const removeButton = createElementWithClass({
+    tag: "button",
+  });
+
   stateCell.appendChild(stateButton);
-
-  const editCell = document.createElement("td");
-  editCell.classList.add("btn_edit");
-  const editButton = document.createElement("button");
   editCell.appendChild(editButton);
-
-  const removeCell = document.createElement("td");
-  removeCell.classList.add("btn_remove");
-  const removeButton = document.createElement("button");
   removeCell.appendChild(removeButton);
-
   todoItemRow.append(numberCell, commentCell, stateCell, editCell, removeCell);
 
   return todoItemRow;
@@ -139,80 +151,60 @@ function makeTodoItemRow(item) {
 
 
 
-// handle
-const handleAddTask = () => {
-  alert("Task added!");
-};
-let statusIndex = 0; 
-
-
-// render()
+ //render
 function render() {
   const root = document.getElementById("app");
-  const container  = makeContainer ();
   
-  const headerWrap  = makeHeaderWrap ();
-
-  const headerTitle  = makeHeaderTitle ();
-  const headerSubText  = makeHeaderSubText ();
-
-  
-  const contentsWrap  = makeContentsWrap ();
-
-  const inputArea  = makeInputArea ();
-  const inputText  = makeInputText ();
-  const submitButton  = makeSubmitButton ();
-
-  submitButton.addEventListener("click", handleAddTask);
-
-
-  const todoListArea  = makeTodoListArea ();
-  const todoListBox = makeTodoListBox();
-  const tableHeader = makeTableHeader();
-  const tableBody = makeTableBody();
-
-  
- //constant
- const statuses = ['Todo', 'In Progress', 'Complete'];
-
-  const todoItems = [
-    {
-      Number: "24",
-      TaskName: "Buy Grocey",
-      status: "Todo",
-      statusClass: "todo",
-    },
-    {
-      Number: "25",
-      TaskName: "Send Email",
-      status: "In Progress",
-      statusClass: "inProgress",
-    },
-    {
-      Number: "28",
-      TaskName: "Finish Assignment",
-      status: "Complete",
-      statusClass: "complete",
-    },
-    {
-      Number: "30",
-      TaskName: "Bake Cake",
-      status: "Todo",
-      statusClass: "todo",
-    },
-    {
-      Number: "31",
-      TaskName: "Write Blog post",
-      status: "In Progress",
-      statusClass: "inProgressActive",
-    },
-  ];
-
-  todoItems.forEach((item) => {
-    const row = makeTodoItemRow(item);
-    tableBody.append(row);
+  const container = createDivWithClass({
+    className : "container"
   });
 
+  const headerWrap = createDivWithClass({
+    className :  "header_wrap"
+  });
+
+  const  headerTitle = createElementWithClass({
+    tag : "h1",
+    className : "header_title",
+    textContent : "TODO List Demo App"
+  });
+  const headerSubText = createElementWithClass({
+    tag : "span",
+    className : "header_sub_text",
+    textContent : "Do it now."
+  });
+
+  const contentsWrap  = createDivWithClass({
+    className :  "contents_wrap"
+  });
+
+  const inputArea = createElementWithClass({
+    tag: "form",
+    className :  "input_area"
+  });
+  const inputText = createElementWithClass({
+    tag : "input",
+    className : "input_text",
+    placeholder : "오목이 밥주기"
+  });
+  const submitButton  = createElementWithClass({
+    tag : "button",
+    className : "btn_submit",
+    textContent : "Add Task"
+  });
+
+  const todoListArea  = createDivWithClass({
+    className :  "todo_list_area"
+  });
+  const todoListBox = createElementWithClass({
+    tag : "table",
+    className : "todo_list_box",
+  });
+
+  const tableHeader = makeTableHeader();
+  const tableBody  = createElementWithClass({
+    tag: "tbody",
+  });
 
   root.appendChild(container);
   container.append(headerWrap, contentsWrap);
@@ -222,9 +214,48 @@ function render() {
   inputArea.append(inputText, submitButton);
   todoListArea.append(todoListBox);
   todoListBox.append(tableHeader, tableBody);
+
+
+
+  let todoItems = [];
+  let newNumber = 1 ; 
   
 
+  const setTodoItems = (newTodoItems) => {
+    todoItems = newTodoItems;
+  }
+  const getAllTodoItems = () => {
+    return todoItems;
+  }
+
+  const appendTodoItem = () => {
+    const task = inputText.value;
+    const newTodoItem = getAllTodoItems(). concat({
+        Number : newNumber++,
+        TaskName : task,
+        status: statuseClassArr[0].classText,
+        statusClass : statuseClassArr[0].classNameTag
+      })
+      setTodoItems(newTodoItem)
+      createTodoItems();
+  }
   
+  const createTodoItems = () => {
+    tableBody.innerHTML = ''; 
+
+    const allTodoItems = getAllTodoItems() 
+    allTodoItems.forEach((item) => {
+      const row = makeTodoItemRow(item);
+      tableBody.append(row);
+      
+    });
+  }
+
+  inputArea.addEventListener("submit", (e) => {
+    e.preventDefault();
+    appendTodoItem();
+  });
+
 }
 
 render();

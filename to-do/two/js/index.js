@@ -1,5 +1,5 @@
 import { todoItems } from "./data.js";
-import { makeDivWithClass, makeElementWithClass, makeListHeader, makeTodoItem } from "./element.js";
+import { makeDivWithClass, makeElementWithClass, makeHeader, makeListHeader, makeTodoItem } from "./element.js";
 
 function listRender() {
   const listWrapper = document.querySelector(".todolist_list");
@@ -17,23 +17,9 @@ function render() {
   const todo_wrap = makeDivWithClass({
     className: "todolist_wrap",
   });
-  const todo_headerwrap = makeDivWithClass({
-    className: "todolist_headerwrap",
-  });
-  const todo_header = makeElementWithClass({
-    tag: "h1",
-    className: "todolist_header",
-    textContent: "TODO List Demo App",
-  });
-  const todo_subheader = makeElementWithClass({
-    tag: "span",
-    className: "todolist_subheader",
-    textContent: "Do it now.",
-  });
 
-  todo_headerwrap.appendChild(todo_header);
-  todo_headerwrap.appendChild(todo_subheader);
-  todo_wrap.appendChild(todo_headerwrap);
+  const headerWrapper = makeHeader()
+  todo_wrap.appendChild(headerWrapper);
 
   const todo_inputwrap = makeDivWithClass({
     className: "todolist_inputwrap",

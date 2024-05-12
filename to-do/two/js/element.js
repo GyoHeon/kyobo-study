@@ -17,6 +17,27 @@ export function makeDivWithClass({ ...options }) {
   return div;
 }
 
+export function makeHeader() {
+  const headerWrapper = makeDivWithClass({
+    className: "todolist_headerwrap",
+  });
+  const header = makeElementWithClass({
+    tag: "h1",
+    className: "todolist_header",
+    textContent: "TODO List Demo App",
+  });
+  const subHeader = makeElementWithClass({
+    tag: "span",
+    className: "todolist_subheader",
+    textContent: "Do it now.",
+  });
+
+  headerWrapper.appendChild(header);
+  headerWrapper.appendChild(subHeader);
+
+  return headerWrapper;
+}
+
 export function makeListHeader() {
   const listHeader = makeElementWithClass({
     tag: "header",

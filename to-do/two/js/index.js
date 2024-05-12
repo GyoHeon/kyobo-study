@@ -2,12 +2,12 @@ import { todoItems } from "./data.js";
 import { makeDivWithClass, makeElementWithClass, makeListHeader, makeTodoItem } from "./element.js";
 
 function listRender() {
-  const todolist_list = document.querySelector(".todolist_list");
+  const listWrapper = document.querySelector(".todolist_list");
 
-  todolist_list.innerHTML = "";
+  listWrapper.innerHTML = "";
 
   todoItems.map((item) => {
-    return makeTodoItem(item, todolist_list);
+    return makeTodoItem(item, listWrapper);
   })
 }
 

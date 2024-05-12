@@ -1,78 +1,69 @@
+function createElement(tag, className, innerHTML = '') {
+    const element = document.createElement(tag);
+    element.className = className;
+    element.innerHTML = innerHTML;
+    return element;
+}
+
 function makeContainer() {
-	const container = document.createElement("div");
-	container.className = "container";
+	const container = createElement('div', 'container');
 
 	return container;
 }
 
 function makeAppTitle() {
-	const appTitle = document.createElement("h1");
-	appTitle.className = "appTitle";
-	appTitle.innerText = "TO DO List Demo App";
-
+	const appTitle = createElement('h1','appTitle',`TO DO List Demo App`);
 	return appTitle;
 }
 
 function makeAppTitleSub() {
-	const appTitleSub = document.createElement("p");
-	appTitleSub.className = "appTitleSub"
-	appTitleSub.innerText = "Do it now."
+	const appTitleSub = createElement('p', 'appTitleSub', `Do it now.`);
 
 	return appTitleSub;
 }
 
 function makeInputWrap() {
-	const inputWrap = document.createElement("div");
-	inputWrap.className = "inputWrap";
+	const inputWrap = createElement('form', 'inputWrap');
 
 	return inputWrap;
 }
 
 function makeInputTxt() {
-	const inputTxt = document.createElement("div");
-	inputTxt.className = "inputTxt";
-	inputTxt.innerHTML = `
-		<input type="text" value="할 일을 적으세요."></input>
-	`
+	const inputTxt = createElement('input', 'inputTxt');
+	inputTxt.type = 'text';
+	inputTxt.value = '할 일을 적으세요.';
 
 	return inputTxt;
 }
 
 function makeInputButton() {
-    const inputButton = document.createElement("div");
-    inputButton.className = "inputButton";
-    inputButton.innerHTML = `
-        <input type="button" value="Add Task"></input>
-    `;
-  
+    const inputButton = createElement('button', 'inputButton');
+	inputButton.type = 'submit';
+	inputButton.innerHTML = 'Add task';
+
     return inputButton;
 }
 
 function makeTodoBox() {
-	const todoBox = document.createElement("div");
-	todoBox.className = "todoBox";
+	const todoBox = createElement('div', 'todoBox');
 
 	return todoBox;
 }
 
 function makeTodoHead() {
-	const todoHead = document.createElement("ul");
-	todoHead.className = "todoHeadWrap";
-	todoHead.innerHTML = `
-	  <li>#</li>
-	  <li>Task Name</li>
-	  <li>Status</li>
-	  <li>Edit</li>
-	  <li>Remove</li>
-	`;
+	const todoHead = createElement('ul', 'todoHeadWrap', `
+		<li>#</li>
+	 	<li>Task Name</li>
+		<li>Status</li>
+		<li>Edit</li>
+		<li>Remove</li>
+	`);
 
 	return todoHead;
 }
 
 function makeTodoList() {
-	const todoList = document.createElement("div");
-	todoList.className = "todoList";
-	todoList.innerHTML = `
+	const todoList = createElement('div', 'todoList', `
 		<ul>
 			<li>1</li>
 			<li>할 일 1</li>
@@ -94,7 +85,7 @@ function makeTodoList() {
 			<li class="buttonEdit"><button type="button" ><span class="blind">수정하기</span></button></li>
 			<li class="buttonRemove"><button type="button"><span class="blind">삭제하기</span></button></li>
 		</ul>
-	`
+	`);
 
 	return todoList;
 }
@@ -116,9 +107,24 @@ function render() {
 	inputWrap.append(inputTxt, inputButton);
 	todoBox.append(todoHead, todoList);
 
-	inputButton.addEventListener('click', function() {
-        alert(inputTxt.querySelector('input').value);
-    });
+	inputButton.addEventListener('click', function(e) {
+		e.preventDefault();
+	
+		const newTodoTxt = inputTxt.value;
+		alert(newTodoTxt)
+	
+		const newTodo = document.createElement('ul');
+		newTodo.innerHTML = `
+			<li>${todoList.children.length + 1}</li>
+			<li>${newTodoTxt}</li>
+			<li class="statusTodo">To do</li>
+			<li class="buttonEdit"><button type="button"><span class="blind">수정하기</span></button></li>
+			<li class="buttonRemove"><button type="button"><span class="blind">삭제하기</span></button></li>
+		`;
+	
+		todoList.appendChild(newTodo);
+	});
+	
 }
 
 render();

@@ -17,6 +17,46 @@ export function makeDivWithClass({ ...options }) {
   return div;
 }
 
+export function makeListHeader() {
+  const listHeader = makeElementWithClass({
+    tag: "header",
+    className: "todolist_item todolist_itemheader",
+  });
+
+  const todolist_number = makeDivWithClass({
+    className: "todolist_number",
+    textContent: "Number",
+  });
+
+  const todolist_name = makeDivWithClass({
+    className: "todolist_name",
+    textContent: "TaskName",
+  });
+
+  const todolist_status = makeDivWithClass({
+    className: "todolist_status",
+    textContent: "Status",
+  });
+
+  const todolist_edit = makeDivWithClass({
+    className: "todolist_edit",
+    textContent: "Edit",
+  });
+
+  const todolist_remove = makeDivWithClass({
+    className: "todolist_remove",
+    textContent: "Remove",
+  });
+
+  listHeader.appendChild(todolist_number);
+  listHeader.appendChild(todolist_name);
+  listHeader.appendChild(todolist_status);
+  listHeader.appendChild(todolist_edit);
+  listHeader.appendChild(todolist_remove);
+  
+  return listHeader 
+}
+
 export function makeTodoItem(item, todolist_list) {
   const todolist_item = makeElementWithClass({
     tag: "li",

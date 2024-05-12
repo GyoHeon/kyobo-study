@@ -1,5 +1,5 @@
 import { todoItems } from "./data.js";
-import { makeDivWithClass, makeElementWithClass, makeTodoItem } from "./element.js";
+import { makeDivWithClass, makeElementWithClass, makeListHeader, makeTodoItem } from "./element.js";
 
 function listRender() {
   const todolist_list = document.querySelector(".todolist_list");
@@ -58,9 +58,6 @@ function render() {
   todo_form.appendChild(todolist_input);
   todo_form.appendChild(todolist_inputbtn);
 
-  todo_inputwrap.appendChild(todo_form);
-  todo_wrap.appendChild(todo_inputwrap);
-
   todo_form.addEventListener("submit", (e) => {
     e.preventDefault();
 
@@ -77,60 +74,25 @@ function render() {
     }
   });
 
+  todo_inputwrap.appendChild(todo_form);
+  todo_wrap.appendChild(todo_inputwrap);
+
   const todo_list_wrap = makeDivWithClass({
     className: "todolist_list_wrap",
   });
+  const listHeader = makeListHeader()
+  todo_list_wrap.appendChild(listHeader);
 
   const todo_list = makeElementWithClass({
     tag: "ul",
     className: "todolist_list",
   });
 
-  const todo_itemheader = makeElementWithClass({
-    tag: "header",
-    className: "todolist_item todolist_itemheader",
-  });
-
-  const todolist_number = makeDivWithClass({
-    className: "todolist_number",
-    textContent: "Number",
-  });
-
-  const todolist_name = makeDivWithClass({
-    className: "todolist_name",
-    textContent: "TaskName",
-  });
-
-  const todolist_status = makeDivWithClass({
-    className: "todolist_status",
-    textContent: "Status",
-  });
-
-  const todolist_edit = makeDivWithClass({
-    className: "todolist_edit",
-    textContent: "Edit",
-  });
-
-  const todolist_remove = makeDivWithClass({
-    className: "todolist_remove",
-    textContent: "Remove",
-  });
-
-  todo_itemheader.appendChild(todolist_number);
-  todo_itemheader.appendChild(todolist_name);
-  todo_itemheader.appendChild(todolist_status);
-  todo_itemheader.appendChild(todolist_edit);
-  todo_itemheader.appendChild(todolist_remove);
-  todo_list_wrap.appendChild(todo_itemheader);
   todo_list_wrap.appendChild(todo_list);
-
-  todoItems.forEach((item) => {
-    makeTodoItem(item, todo_list);
-  });
-
   todo_wrap.appendChild(todo_list_wrap);
-
   root.appendChild(todo_wrap);
+
+  listRender();
 }
 
 render();

@@ -29,7 +29,7 @@
   box-sizing: border-box;
 }
 
-.todolist_inputwrap {
+.todolist_form {
   display: flex;
   justify-content: flex-start;
   align-items: center;

@@ -2,6 +2,7 @@ import { todoItems } from "./data.js";
 import {
   makeDivWithClass,
   makeElementWithClass,
+  makeForm,
   makeHeader,
   makeListHeader,
 } from "./element.js";
@@ -22,30 +23,9 @@ export function render() {
   const headerWrapper = makeHeader();
   todo_wrap.appendChild(headerWrapper);
 
-  const todo_inputwrap = makeDivWithClass({
-    className: "todolist_inputwrap",
-  });
+  const todoForm = makeForm();
 
-  const todo_form = makeElementWithClass({
-    tag: "form",
-    className: "todolist_form",
-  });
-
-  const todolist_input = makeElementWithClass({
-    tag: "input",
-    className: "todolist_input",
-    placeholder: "Add your task",
-  });
-  const todolist_inputbtn = makeElementWithClass({
-    tag: "button",
-    className: "todolist_inputbtn",
-    textContent: "Add Task",
-  });
-
-  todo_form.appendChild(todolist_input);
-  todo_form.appendChild(todolist_inputbtn);
-
-  todo_form.addEventListener("submit", (e) => {
+  todoForm.addEventListener("submit", (e) => {
     e.preventDefault();
 
     const task = todolist_input.value;
@@ -64,8 +44,7 @@ export function render() {
     }
   });
 
-  todo_inputwrap.appendChild(todo_form);
-  todo_wrap.appendChild(todo_inputwrap);
+  todo_wrap.appendChild(todoForm);
 
   const todo_list_wrap = makeDivWithClass({
     className: "todolist_list_wrap",

@@ -41,6 +41,29 @@ export function makeHeader() {
   return headerWrapper;
 }
 
+export function makeForm() {
+  const todoForm = makeElementWithClass({
+    tag: "form",
+    className: "todolist_form",
+  });
+
+  const todoInput = makeElementWithClass({
+    tag: "input",
+    className: "todolist_input",
+    placeholder: "Add your task",
+  });
+  const formBtn = makeElementWithClass({
+    tag: "button",
+    className: "todolist_inputbtn",
+    textContent: "Add Task",
+  });
+
+  todoForm.appendChild(todoInput);
+  todoForm.appendChild(formBtn);
+
+  return todoForm;
+}
+
 export function makeListHeader() {
   const listHeader = makeElementWithClass({
     tag: "header",

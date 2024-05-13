@@ -1,5 +1,5 @@
 import { todoItems } from "./data.js";
-import { listRender } from "./index.js";
+import { listRender } from "./list.js";
 
 export function makeElementWithClass({ tag, ...options }) {
   const element = document.createElement(tag);

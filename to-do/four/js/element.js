@@ -61,6 +61,25 @@ export function makeForm() {
   todoForm.appendChild(todoInput);
   todoForm.appendChild(formBtn);
 
+  todoForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+
+    const task = todoInput.value;
+    if (task) {
+      todoItems.push({
+        Number: "31",
+        TaskName: task,
+        status: "In Progress",
+        statusClass: "inProgressActive",
+      });
+
+      const listWrapper = document.querySelector("ul.todolist_list");
+      if (listWrapper) {
+        listRender(listWrapper);
+      }
+    }
+  });
+
   return todoForm;
 }
 
@@ -109,44 +128,58 @@ export function makeTodoItem(item, index) {
     tag: "li",
     className: "todolist_item",
   });
+
   const todolist_number = makeDivWithClass({
     className: "todolist_number",
     textContent: item.Number,
   });
-  const todolist_name = makeDivWithClass({
+  todolist_item.appendChild(todolist_number);
+
+  const todoName = makeElementWithClass({
+    tag: "input",
     className: "todolist_name",
-    textContent: item.TaskName,
+    value: item.TaskName,
+    disabled: true,
   });
+  todolist_item.appendChild(todoName);
+
   const todolist_status = makeDivWithClass({
     className: "todolist_status",
   });
+  todolist_item.appendChild(todolist_status);
+
   const todolist_statusbadge = makeDivWithClass({
     className: "todolist_statusbadge " + item.statusClass,
     textContent: item.status,
   });
-  const todolist_edit = makeDivWithClass({
+  todolist_status.appendChild(todolist_statusbadge);
+
+  const todoEdit = makeDivWithClass({
     className: "todolist_edit",
   });
+  todolist_item.appendChild(todoEdit);
 
-  const todolist_editbtn = makeElementWithClass({
+  const todoEditBtn = makeElementWithClass({
     tag: "button",
     className: "todolist_editbtn",
     textContent: "Edit",
   });
+  todoEdit.appendChild(todoEditBtn);
 
-  todolist_editbtn.addEventListener("click", () => {
+  todoEditBtn.addEventListener("click", () => {
     alert("Edit Clicked");
   });
 
   const todolist_remove = makeDivWithClass({
     className: "todolist_remove",
   });
+  todolist_item.appendChild(todolist_remove);
+
   const todolist_removebtn = makeElementWithClass({
     tag: "button",
     className: "todolist_removebtn",
     textContent: "Remove",
   });
-
   todolist_remove.addEventListener("click", () => {
     todoItems.splice(index, 1);
 
@@ -155,17 +188,6 @@ export function makeTodoItem(item, index) {
       listRender(listWrapper);
     }
   });
-
-  todolist_item.appendChild(todolist_number);
-  todolist_item.appendChild(todolist_name);
-
-  todolist_item.appendChild(todolist_status);
-  todolist_status.appendChild(todolist_statusbadge);
-
-  todolist_item.appendChild(todolist_edit);
-  todolist_edit.appendChild(todolist_editbtn);
-
-  todolist_item.appendChild(todolist_remove);
   todolist_remove.appendChild(todolist_removebtn);
 
   return todolist_item;

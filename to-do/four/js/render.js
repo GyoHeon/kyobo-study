@@ -1,4 +1,3 @@
-import { todoItems } from "./data.js";
 import {
   makeDivWithClass,
   makeElementWithClass,
@@ -24,26 +23,6 @@ export function render() {
   todo_wrap.appendChild(headerWrapper);
 
   const todoForm = makeForm();
-
-  todoForm.addEventListener("submit", (e) => {
-    e.preventDefault();
-
-    const task = todolist_input.value;
-    if (task) {
-      todoItems.push({
-        Number: "31",
-        TaskName: task,
-        status: "In Progress",
-        statusClass: "inProgressActive",
-      });
-
-      const listWrapper = document.querySelector("ul.todolist_list");
-      if (listWrapper) {
-        listRender(listWrapper);
-      }
-    }
-  });
-
   todo_wrap.appendChild(todoForm);
 
   const todo_list_wrap = makeDivWithClass({

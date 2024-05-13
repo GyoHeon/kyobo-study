@@ -167,7 +167,7 @@ export function makeTodoItem(item, index) {
   todoEdit.appendChild(todoEditBtn);
 
   todoEditBtn.addEventListener("click", () => {
-    alert("Edit Clicked");
+    todoName.disabled = !todoName.disabled;
   });
 
   const todolist_remove = makeDivWithClass({

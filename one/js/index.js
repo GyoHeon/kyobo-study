@@ -1,160 +1,20 @@
-// 태그 생성 함수 
-function createElementWithClass({ tag, ...options }) {
-  const element = document.createElement(tag);
-
-  Object.entries(options).forEach(([key, value]) => {
-    element[key] = value;
-  });
-
-  return element;
-}
-
-function createDivWithClass({ ...options }) {
-  const div = createElementWithClass({
-    tag: "div",
-    ...options,
-  });
-
-  return div;
-}
-
-
- //constant
- const statuseClassArr = [
-  {
-    classNameTag: "todo",
-    classText: "Todo"
-    
-  },
-  {
-    classNameTag: "inProgress",
-    classText: "In Progress"
-  },
-  {
-    classNameTag: "inProgressActive",
-    classText: "In Progress"
-  },
-  {
-    classNameTag: "complete",
-    classText: "Complete"
-  }
-];
-
-// table Header
-function makeTableHeader() {
-  const tableHeader = createElementWithClass({
-    tag: "thead",
-  });
-  const tableHeaderRow = createElementWithClass({
-    tag: "tr",
-  });
-
-  const numberHeader = createElementWithClass({
-    tag: "th",
-    className : "number",
-    textContent : "#"
-  });
-  
-  const commentHeader = createElementWithClass({
-    tag: "th",
-    className : "comment",
-    textContent : "TaskName"
-  });
-
-  const stateHeader = createElementWithClass({
-    tag: "th",
-    className : "state",
-    textContent : "Status"
-  });
-  
-  const editHeader = createElementWithClass({
-    tag: "th",
-    className : "btn_edit",
-    textContent : "Edit"
-  });
-  
-  const removeHeader = createElementWithClass({
-    tag: "th",
-    className : "btn_remove",
-    textContent : "Remove"
-  });
-  tableHeaderRow.append(numberHeader, commentHeader, stateHeader, editHeader, removeHeader);
-  tableHeader.appendChild(tableHeaderRow);
-
-  return tableHeader;
-}
-
-
-//todo item
-function makeTodoItemRow(item) {
-
-  const todoItemRow = document.createElement("tr");
-  todoItemRow.classList.add("input_list_item");
-
-  const numberCell = createElementWithClass({
-    tag: "td",
-    className : "number",
-    textContent : item.Number
-  });
-
-  const commentCell  = createElementWithClass({
-    tag: "td",
-    className : "comment",
-    textContent : item.TaskName
-  });
-
-  const stateCell = createElementWithClass({
-    tag: "td",
-    className : `state ${statuseClassArr[0].classNameTag}`,
-  });
-
-  const stateButton = createElementWithClass({
-    tag: "button",
-    textContent : `${statuseClassArr[0].classText}`,
-  });
-
-  let currentIndex = 0;
-  stateButton.addEventListener("click", () => {
-    
-    currentIndex = currentIndex < 3 ? currentIndex + 1 : 0;
-   
-    stateCell.className = `state ${statuseClassArr[currentIndex].classNameTag}`;
-    stateButton.textContent = `${statuseClassArr[currentIndex].classText}`;
-  });
-
-  const editCell = createElementWithClass({
-    tag: "td",
-    className : "btn_edit",
-  });
-
-  const editButton =  createElementWithClass({
-    tag: "button",
-  });
-  
-  const removeCell = createElementWithClass({
-    tag: "td",
-    className : "btn_remove",
-  });
-
-  const removeButton = createElementWithClass({
-    tag: "button",
-  });
-
-  stateCell.appendChild(stateButton);
-  editCell.appendChild(editButton);
-  removeCell.appendChild(removeButton);
-  todoItemRow.append(numberCell, commentCell, stateCell, editCell, removeCell);
-
-  return todoItemRow;
-}
-
-
+import { statusClassArr } from "./data.js";
+import {
+  createElementWithClass,
+  createDivWithClass,
+  makeTableHeader,
+  makeTodoItemRow
+} from "./element.js";
 
 
  //render
 function render() {
   const root = document.getElementById("app");
   
+  if(!root) {
+    alert("Root element not found");
+    return;
+  }
   const container = createDivWithClass({
     className : "container"
   });
@@ -233,8 +93,8 @@ function render() {
     const newTodoItem = getAllTodoItems(). concat({
         Number : newNumber++,
         TaskName : task,
-        status: statuseClassArr[0].classText,
-        statusClass : statuseClassArr[0].classNameTag
+        status: statusClassArr[0].classText,
+        statusClass : statusClassArr[0].classNameTag
       })
       setTodoItems(newTodoItem)
       createTodoItems();
@@ -244,8 +104,8 @@ function render() {
     tableBody.innerHTML = ''; 
 
     const allTodoItems = getAllTodoItems() 
-    allTodoItems.forEach((item) => {
-      const row = makeTodoItemRow(item);
+    allTodoItems.forEach((item, index) => {
+      const row = makeTodoItemRow(item, index, statusClassArr, todoItems, setTodoItems, createTodoItems);
       tableBody.append(row);
       
     });

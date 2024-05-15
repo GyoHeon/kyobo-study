@@ -68,21 +68,21 @@ function makeTodoList() {
 			<li>1</li>
 			<li>할 일 1</li>
 			<li class="statusTodo">To do</li>
-			<li class="buttonEdit"><button type="button" ><span class="blind">수정하기</span></button></li>
+			<li class="buttonEdit"><button type="button"><span class="blind">수정하기</span></button></li>
 			<li class="buttonRemove"><button type="button"><span class="blind">삭제하기</span></button></li>
 		</ul>
 		<ul>
 			<li>2</li>
 			<li>할 일 2</li>
 			<li class="statusProgress">In Progress</li>
-			<li class="buttonEdit"><button type="button" ><span class="blind">수정하기</span></button></li>
+			<li class="buttonEdit"><button type="button"><span class="blind">수정하기</span></button></li>
 			<li class="buttonRemove"><button type="button"><span class="blind">삭제하기</span></button></li>
 		</ul>
 		<ul>
 			<li>3</li>
 			<li>할 일 3</li>
 			<li class="statusComplete">Complete</li>
-			<li class="buttonEdit"><button type="button" ><span class="blind">수정하기</span></button></li>
+			<li class="buttonEdit"><button type="button"><span class="blind">수정하기</span></button></li>
 			<li class="buttonRemove"><button type="button"><span class="blind">삭제하기</span></button></li>
 		</ul>
 	`);
@@ -90,7 +90,32 @@ function makeTodoList() {
 	return todoList;
 }
 
+
+function clickRemove() {//삭제 버튼 클릭 시 할 일 삭제
+    const removeBtns = document.querySelectorAll('.buttonRemove');
+    removeBtns.forEach(button => {
+        button.addEventListener('click', () => {
+            button.parentNode.remove();
+        });
+    });
+}
+
+function clickEdit() {//수정 버튼 클릭 시 해당 할 일 내용 수정
+    const editBtns = document.querySelectorAll('.buttonEdit');
+    editBtns.forEach(button => {
+        button.addEventListener('click', () => {
+            const taskItem = button.closest('ul');
+            const taskTxt = taskItem.querySelector('li:nth-child(2)');
+            const newTaskTxt = prompt('수정할 내용을 입력하세요:', taskTxt.textContent);
+            if (newTaskName !== null && newTaskName.trim() !== '') {
+                taskName.textContent = newTaskName;
+            }
+        });
+    });
+}
+
 function render() {
+
  	const root = document.getElementById("app");
 	const container = makeContainer();
 	const appTitle = makeAppTitle();
@@ -107,12 +132,15 @@ function render() {
 	inputWrap.append(inputTxt, inputButton);
 	todoBox.append(todoHead, todoList);
 
+	
+	clickRemove();// 삭제 버튼 클릭시 할 일 삭제 기능 등록
+	clickEdit();// 수정 버튼 클릭 시 할 일 내용 수정 기능 등록
+
+	//add Task 클릭 시 추가
 	inputButton.addEventListener('click', function(e) {
 		e.preventDefault();
-	
-		const newTodoTxt = inputTxt.value;
-		alert(newTodoTxt)
-	
+		
+		const newTodoTxt = inputTxt.value;	
 		const newTodo = document.createElement('ul');
 		newTodo.innerHTML = `
 			<li>${todoList.children.length + 1}</li>
@@ -123,8 +151,12 @@ function render() {
 		`;
 	
 		todoList.appendChild(newTodo);
+		clickRemove();// 삭제 버튼 클릭시 할 일 삭제 기능 등록
+		clickEdit();// 수정 버튼 클릭 시 할 일 내용 수정 기능 등록
+
 	});
 	
 }
+
 
 render();

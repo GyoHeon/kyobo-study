@@ -94,7 +94,14 @@
 }
 .todolist_item .todolist_name{
   width: 50%;
+  box-sizing: border-box;
 }
+input[class="todolist_name"]:disabled {
+  border: 0px;
+  background-color: transparent;
+  text-align: center;
+}
+
 .todolist_item .todolist_status{
   width: 20%;
 }

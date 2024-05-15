@@ -11,6 +11,7 @@ export function listRender(listWrapper) {
   listWrapper.innerHTML = "";
 
   todoItems.map((item, index) => {
+    item.Number = index;
     const listItem = makeTodoItem(item, index);
 
     listWrapper.appendChild(listItem);
@@ -46,6 +47,7 @@ function render() {
     className: "todolist_input",
     placeholder: "Add your tas",
   });
+
   const todolist_inputbtn = makeElementWithClass({
     tag: "button",
     className: "todolist_inputbtn",
@@ -61,7 +63,6 @@ function render() {
     const task = todolist_input.value;
     if (task) {
       todoItems.push({
-        Number: "31",
         TaskName: task,
         status: "In Progress",
         statusClass: "inProgressActive",

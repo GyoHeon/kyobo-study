@@ -1,5 +1,5 @@
-import { todoItems } from "./data.js";
-import { listRender } from "./index.js";
+import {todoItems} from "./data.js";
+import {listRender} from "./index.js";
 
 export function makeElementWithClass({ tag, ...options }) {
   const element = document.createElement(tag);
@@ -12,12 +12,10 @@ export function makeElementWithClass({ tag, ...options }) {
 }
 
 export function makeDivWithClass({ ...options }) {
-  const div = makeElementWithClass({
+  return makeElementWithClass({
     tag: "div",
     ...options,
   });
-
-  return div;
 }
 
 export function makeHeader() {
@@ -86,21 +84,28 @@ export function makeTodoItem(item, index) {
     tag: "li",
     className: "todolist_item",
   });
+
   const todolist_number = makeDivWithClass({
     className: "todolist_number",
-    textContent: item.Number,
+    textContent: index + 1,
   });
+
   const todolist_name = makeDivWithClass({
+    tag: "input",
     className: "todolist_name",
-    textContent: item.TaskName,
+    value: item.TaskName,
+    disabled: true
   });
+
   const todolist_status = makeDivWithClass({
     className: "todolist_status",
   });
+
   const todolist_statusbadge = makeDivWithClass({
     className: "todolist_statusbadge " + item.statusClass,
     textContent: item.status,
   });
+
   const todolist_edit = makeDivWithClass({
     className: "todolist_edit",
   });
@@ -108,21 +113,23 @@ export function makeTodoItem(item, index) {
   const todolist_editbtn = makeElementWithClass({
     tag: "button",
     className: "todolist_editbtn",
-    textContent: "Edit",
+    textContent: "Edit"
   });
 
   todolist_editbtn.addEventListener("click", () => {
-    alert("Edit Clicked");
+    todolist_name.disabled = !todolist_name.disabled
   });
 
   const todolist_remove = makeDivWithClass({
     className: "todolist_remove",
   });
+
   const todolist_removebtn = makeElementWithClass({
     tag: "button",
     className: "todolist_removebtn",
     textContent: "Remove",
   });
+
 
   todolist_remove.addEventListener("click", () => {
     todoItems.splice(index, 1);

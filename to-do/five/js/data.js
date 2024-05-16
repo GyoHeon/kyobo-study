@@ -2,31 +2,33 @@ export const todoItems = [
   {
     Number: "24",
     TaskName: "Buy Grocey",
-    status: "Todo",
-    statusClass: "todo",
+    status: 0,
   },
   {
     Number: "25",
     TaskName: "Send Email",
-    status: "In Progress",
-    statusClass: "inProgress",
+    status: 1,
   },
   {
     Number: "28",
     TaskName: "Finish Assignment",
-    status: "Complete",
-    statusClass: "complete",
+    status: 2,
   },
   {
     Number: "30",
     TaskName: "Bake Cake",
-    status: "Todo",
-    statusClass: "todo",
+    status: 0,
   },
   {
     Number: "31",
     TaskName: "Write Blog post",
-    status: "In Progress",
-    statusClass: "inProgressActive",
+    status: 1,
   },
 ];
+
+export const status = ["Todo", "In Progress", "Complete"];
+export const statusClassObj = {
+  Todo: "todo",
+  "In Progress": "inProgress",
+  Complete: "complete",
+};

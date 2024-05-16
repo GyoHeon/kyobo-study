@@ -1,4 +1,4 @@
-import { todoItems } from "./data.js";
+import { status, statusClassObj, todoItems } from "./data.js";
 import { listRender } from "./list.js";
 
 export function makeElementWithClass({ tag, ...options }) {
@@ -148,11 +148,19 @@ export function makeTodoItem(item, index) {
   });
   todolist_item.appendChild(todolist_status);
 
-  const todolist_statusbadge = makeDivWithClass({
-    className: "todolist_statusbadge " + item.statusClass,
-    textContent: item.status,
+  const statusStr = status[item.status];
+  const todoBadge = makeDivWithClass({
+    className: "todolist_statusbadge " + statusClassObj[statusStr],
+    textContent: statusStr,
   });
-  todolist_status.appendChild(todolist_statusbadge);
+  todoBadge.addEventListener("click", () => {
+    const statusIndex = (item.status + 1) % 3;
+    item.status = statusIndex;
+    todoBadge.textContent = status[statusIndex];
+    todoBadge.className =
+      "todolist_statusbadge " + statusClassObj[status[statusIndex]];
+  });
+  todolist_status.appendChild(todoBadge);
 
   const todoEdit = makeDivWithClass({
     className: "todolist_edit",

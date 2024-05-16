@@ -91,7 +91,7 @@ function makeTodoList() {
 }
 
 
-function clickRemove() {//삭제 버튼 클릭 시 할 일 삭제
+function removeTodo() {//삭제 버튼 클릭 시 할 일 삭제
     const removeBtns = document.querySelectorAll('.buttonRemove');
     removeBtns.forEach(button => {
         button.addEventListener('click', () => {
@@ -100,14 +100,14 @@ function clickRemove() {//삭제 버튼 클릭 시 할 일 삭제
     });
 }
 
-function clickEdit() {//수정 버튼 클릭 시 해당 할 일 내용 수정
+function edtiTodoTxt() {//수정 버튼 클릭 시 해당 할 일 내용 직성
     const editBtns = document.querySelectorAll('.buttonEdit');
     editBtns.forEach(button => {
         button.addEventListener('click', () => {
-            const taskItem = button.closest('ul');
-            const taskTxt = taskItem.querySelector('li:nth-child(2)');
-            const newTaskTxt = prompt('수정할 내용을 입력하세요:', taskTxt.textContent);
-            if (newTaskTxt !== null && newTaskTxt.trim() !== '') {
+            const todoItem = button.closest('ul');
+            const taskName = todoItem.querySelector('li:nth-child(2)');
+            const newTaskTxt = prompt('수정할 내용을 입력하세요:', taskName.textContent);
+            if (newTaskTxt !== null) {
                 taskName.textContent = newTaskTxt;
             }
         });
@@ -131,8 +131,10 @@ function render() {
 	container.append(appTitle, appTitleSub, inputWrap, todoBox);
 	inputWrap.append(inputTxt, inputButton);
 	todoBox.append(todoHead, todoList);
-	clickRemove();// 삭제 버튼 클릭시 할 일 삭제 기능 등록
-	clickEdit();// 수정 버튼 클릭 시 할 일 내용 수정 기능 등록
+
+	
+	removeTodo();// 삭제 버튼 클릭시 할 일 삭제 기능 등록
+	edtiTodoTxt();// Edit 버튼 이벤트 핸들러 등록
 
 	//add Task 클릭 시 추가
 	inputButton.addEventListener('click', function(e) {
@@ -149,8 +151,8 @@ function render() {
 		`;
 	
 		todoList.appendChild(newTodo);
-		clickRemove();// 삭제 버튼 클릭시 할 일 삭제 기능 등록
-		clickEdit();// 수정 버튼 클릭 시 할 일 내용 수정 기능 등록
+		removeTodo();// 삭제 버튼 클릭시 할 일 삭제 기능 등록
+		edtiTodoTxt();// Edit 버튼 이벤트 핸들러 등록
 
 	});
 	

@@ -107,8 +107,10 @@ function clickEdit() {//수정 버튼 클릭 시 해당 할 일 내용 수정
             const taskItem = button.closest('ul');
             const taskTxt = taskItem.querySelector('li:nth-child(2)');
             const newTaskTxt = prompt('수정할 내용을 입력하세요:', taskTxt.textContent);
-            if (newTaskName !== null && newTaskName.trim() !== '') {
-                taskName.textContent = newTaskName;
+            if (newTaskTxt !== null && newTaskTxt.trim() !== '') {
+                taskTxt.textContent = newTaskTxt;
+            } else if (newTaskTxt === '') {
+                alert('수정 내용이 입력되지 않았습니다. 다시 입력하세요.');
             }
         });
     });

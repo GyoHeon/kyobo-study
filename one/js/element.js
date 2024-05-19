@@ -1,5 +1,4 @@
-
-import { statusClassArr } from "./data.js";
+import { statusStr, statusClassObj } from "./data.js";
 
 // 태그 생성 함수 
 export function createElementWithClass({ tag, ...options }) {
@@ -70,7 +69,7 @@ export function makeTableHeader() {
 
 
 //todo item
-export function makeTodoItemRow(item, index, statusClassArr, todoItems, setTodoItems, createTodoItems) {
+export function makeTodoItemRow(item, index, status, todoItems, setTodoItems, createTodoItems) {
 
     const todoItemRow = document.createElement("tr");
     todoItemRow.classList.add("input_list_item");
@@ -95,21 +94,22 @@ export function makeTodoItemRow(item, index, statusClassArr, todoItems, setTodoI
 
     const stateCell = createElementWithClass({
         tag: "td",
-        className : `state ${statusClassArr[0].classNameTag}`,
+        className : "status",
     });
-
+    
     const stateButton = createElementWithClass({
         tag: "button",
-        textContent : `${statusClassArr[0].classText}`,
+        textContent : statusStr[item.statusStr],
+        className : `state ${statusClassObj[statusStr[item.statusStr]]}`,
     });
 
-    let currentIndex = 0;
     stateButton.addEventListener("click", () => {
-        
-        currentIndex = currentIndex < 3 ? currentIndex + 1 : 0;
-        
-        stateCell.className = `state ${statusClassArr[currentIndex].classNameTag}`;
-        stateButton.textContent = `${statusClassArr[currentIndex].classText}`;
+        const statusIndex = (item.statusStr + 1) % 3;
+        item.statusStr = statusIndex;
+        stateButton.textContent = statusStr[statusIndex];
+        stateButton.className =
+        "state " + statusClassObj[statusStr[statusIndex]];
+        setTodoItems([...todoItems]);
     });
 
     const editCell = createElementWithClass({
@@ -131,6 +131,7 @@ export function makeTodoItemRow(item, index, statusClassArr, todoItems, setTodoI
         if (!isDiabled) {
         todoItems[index].TaskName = commentText.value;
         editButton.classList.remove("complete");
+        setTodoItems([...todoItems]);
         }
     });
     commentText.addEventListener("keydown", (e) => {
@@ -138,6 +139,7 @@ export function makeTodoItemRow(item, index, statusClassArr, todoItems, setTodoI
           commentText.disabled = true;
           todoItems[index].TaskName = commentText.value;
           editButton.classList.remove("complete");
+          setTodoItems([...todoItems]);
         }
       });
 

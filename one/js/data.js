@@ -1,19 +1,6 @@
-export const statusClassArr = [
-    {
-      classNameTag: "todo",
-      classText: "Todo"
-      
-    },
-    {
-      classNameTag: "inProgress",
-      classText: "In Progress"
-    },
-    {
-      classNameTag: "inProgressActive",
-      classText: "In Progress"
-    },
-    {
-      classNameTag: "complete",
-      classText: "Complete"
-    }
-  ];
+export const statusStr = ["Todo", "InProgress", "Complete"];
+export const statusClassObj = {
+  "Todo": "todo",
+  "InProgress": "inProgress",
+  "Complete": "complete",
+};

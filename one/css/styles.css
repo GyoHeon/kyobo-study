@@ -118,13 +118,26 @@
 }
 
 .container .todoBox .todoList ul {
-  padding:5px 0 ;
+  padding:5px 0;
   display: flex;
   align-items: center;
 }
 
+.container .todoBox .statusFilter {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
-.container .todoBox .todoList button {
+.container .todoBox .statusFilter button {
+  margin-left: 5px;
+  display: inline-block;
+  width:20px;
+  height:20px;
+}
+
+
+.container .todoBox .todoList .buttonEdit button, .container .todoBox .todoList .buttonRemove button {
   width:25px;
   height:25px;
   background-color: transparent;
@@ -135,16 +148,31 @@
   cursor: pointer;
 }
 
-.container .todoBox .statusTodo {
+.container .todoBox .status {
+  cursor: pointer;
+}
+
+.container .todoBox .status button {
+  font-size: 18px;
+  line-height: 24px;
+  background-color: #fff;
+  border-radius: 15px;
+}
+
+.container .todoBox button.statusTodo {
   color:red;
+  border-color: red;
 }
 
-.container .todoBox .statusProgress {
+.container .todoBox button.statusProgress {
   color:blueviolet;
+  border-color: blueviolet;
 }
 
-.container .todoBox .statusComplete {
-  color:grey;
+.container .todoBox button.statusComplete {
+  color:#fff;
+  background-color: lightgray;
+  border-color: lightgray;
 }
 
 .container .todoBox .buttonEdit button {

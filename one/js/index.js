@@ -53,8 +53,11 @@ function makeTodoBox() {
 function makeTodoHead() {
 	const todoHead = createElement('ul', 'todoHeadWrap', `
 		<li>#</li>
-	 	<li>Task Name</li>
-		<li>Status</li>
+	 	<li></li>
+		<li class="statusFilter">
+			Status
+			<button type="button"><span class="blind">status filter</span></button>
+		</li>
 		<li>Edit</li>
 		<li>Remove</li>
 	`);
@@ -67,21 +70,21 @@ function makeTodoList() {
 		<ul>
 			<li>1</li>
 			<li>할 일 1</li>
-			<li class="statusTodo">To do</li>
+			<li class="status"><button type="button" class="statusTodo">To do</button></li>
 			<li class="buttonEdit"><button type="button"><span class="blind">수정하기</span></button></li>
 			<li class="buttonRemove"><button type="button"><span class="blind">삭제하기</span></button></li>
 		</ul>
 		<ul>
 			<li>2</li>
 			<li>할 일 2</li>
-			<li class="statusProgress">In Progress</li>
+			<li class="status"><button type="button" class="statusProgress">In Progress</button></li>
 			<li class="buttonEdit"><button type="button"><span class="blind">수정하기</span></button></li>
 			<li class="buttonRemove"><button type="button"><span class="blind">삭제하기</span></button></li>
 		</ul>
 		<ul>
 			<li>3</li>
 			<li>할 일 3</li>
-			<li class="statusComplete">Complete</li>
+			<li class="status"><button type="button" class="statusComplete">Complete</button></li>
 			<li class="buttonEdit"><button type="button"><span class="blind">수정하기</span></button></li>
 			<li class="buttonRemove"><button type="button"><span class="blind">삭제하기</span></button></li>
 		</ul>
@@ -114,6 +117,25 @@ function edtiTodoTxt() {//수정 버튼 클릭 시 해당 할 일 내용 직성
     });
 }
 
+function statusChange() {//상태 클릭 시 변경
+	document.querySelectorAll('.status button').forEach(button => {
+		const todoStatus = [
+			{ class: 'statusTodo', text: 'To do' },
+			{ class: 'statusProgress', text: 'In Progress' },
+			{ class: 'statusComplete', text: 'Complete' }
+		];
+	
+		button.addEventListener('click', () => {
+			const currentIndex = todoStatus.findIndex(status => button.classList.contains(status.class));
+			const nextIndex = (currentIndex + 1) % 3;
+	
+			button.className = todoStatus[nextIndex].class;
+			button.textContent = todoStatus[nextIndex].text;
+		});
+	});
+}
+
+
 function render() {
 
  	const root = document.getElementById("app");
@@ -135,6 +157,7 @@ function render() {
 	
 	removeTodo();// 삭제 버튼 클릭시 할 일 삭제 기능 등록
 	edtiTodoTxt();// Edit 버튼 이벤트 핸들러 등록
+	statusChange();// status 클릭 시 변경
 
 	//add Task 클릭 시 추가
 	inputButton.addEventListener('click', function(e) {
@@ -145,7 +168,7 @@ function render() {
 		newTodo.innerHTML = `
 			<li>${todoList.children.length + 1}</li>
 			<li>${newTodoTxt}</li>
-			<li class="statusTodo">To do</li>
+			<li class="status"><button type="button" class="statusTodo">To do</button></li>
 			<li class="buttonEdit"><button type="button"><span class="blind">수정하기</span></button></li>
 			<li class="buttonRemove"><button type="button"><span class="blind">삭제하기</span></button></li>
 		`;
@@ -153,6 +176,7 @@ function render() {
 		todoList.appendChild(newTodo);
 		removeTodo();// 삭제 버튼 클릭시 할 일 삭제 기능 등록
 		edtiTodoTxt();// Edit 버튼 이벤트 핸들러 등록
+		statusChange();// status 클릭 시 변경
 
 	});
 	

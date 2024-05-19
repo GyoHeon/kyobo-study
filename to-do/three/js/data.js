@@ -6,7 +6,7 @@ export const todoItems = [
   },
   {
     TaskName: "Send Email",
-    status: "In Progress",
+    status: "InProgress",
     statusClass: "inProgress",
   },
   {
@@ -21,7 +21,7 @@ export const todoItems = [
   },
   {
     TaskName: "Write Blog post",
-    status: "In Progress",
-    statusClass: "inProgressActive",
+    status: "InProgress",
+    statusClass: "inProgress",
   },
 ];

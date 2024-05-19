@@ -16,6 +16,7 @@
   text-align: left;
   margin-bottom: 10px;
 }
+
 .todolist_subheader {
   display: inline-block;
   box-sizing: border-box;
@@ -100,6 +101,7 @@
 .todolist_item .todolist_status {
   width: 20%;
 }
+
 .todolist_status .todolist_statusbadge {
   display: inline-block;
   min-height: 36px;
@@ -109,27 +111,26 @@
   border-radius: 5px;
   box-sizing: border-box;
 }
+
 .todolist_status .todolist_statusbadge.todo {
   border: 1px solid #6c757d;
   color: #6c757d;
 }
+
 .todolist_status .todolist_statusbadge.inProgress {
   border: 1px solid #ffc107;
   color: #ffc107;
 }
-.todolist_status .todolist_statusbadge.complete {
+
+.todolist_status .todolist_statusbadge.complete{
   border: 1px solid #198754;
   color: #198754;
-}
-.todolist_status .todolist_statusbadge.inProgressActive {
-  border: 1px solid #ffc107;
-  background-color: #ffc107;
-  color: #000;
 }
 
 .todolist_item .todolist_edit {
   width: 10%;
 }
+
 .todolist_item .todolist_edit .todolist_editbtn {
   width: 36px;
   height: 36px;

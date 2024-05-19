@@ -7,14 +7,15 @@ import {
   makeTodoItem,
 } from "./element.js";
 
-export function listRender(listWrapper) {
+export function listRender(listWrapper, filter) {
   listWrapper.innerHTML = "";
 
   todoItems.map((item, index) => {
     item.Number = index;
-    const listItem = makeTodoItem(item, index);
-
-    listWrapper.appendChild(listItem);
+    if (!filter || filter === item.status) {
+      const listItem = makeTodoItem(item, index);
+      listWrapper.appendChild(listItem);
+    }
   });
 }
 

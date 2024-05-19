@@ -127,6 +127,22 @@ body {
 .todo_list_area .todo_list_box .comment {
   width: 50%;
 }
+.todo_list_area .todo_list_box .comment .comment_text {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  border: none;
+  outline: none;
+  background: transparent;
+  background-color: #9d9a7319;
+  text-align: center;
+}
+
+.todo_list_area .todo_list_box .comment .comment_text:disabled { 
+  background-color: transparent;
+}
+
+
 
 .todo_list_area .todo_list_box .state {
   width: 15%;
@@ -135,12 +151,17 @@ body {
 .todo_list_area .todo_list_box .btn_edit {
   width: 15%;
 }
+
 .todo_list_area .todo_list_box .btn_edit button {
   display: block;
   width: 100%;
   height: 20px;
   margin: 0 auto;
   background: url(../assets/img_edit.png) 50% 50% no-repeat;
+  background-size: 20px 20px;
+}
+.todo_list_area .todo_list_box .btn_edit button.complete {
+  background: url(../assets/img_save.png) 50% 50% no-repeat;
   background-size: 20px 20px;
 }
 .todo_list_area .todo_list_box .btn_remove {

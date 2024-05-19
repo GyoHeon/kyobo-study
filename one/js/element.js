@@ -86,9 +86,10 @@ export function makeTodoItemRow(item, index, statusClassArr, todoItems, setTodoI
         className : "comment",
     });
     const commentText =  createElementWithClass({
-        tag: "span",
+        tag: "input",
         className:"comment_text",
-        textContent : item.TaskName
+        value : item.TaskName,
+        disabled: true,
     });
 
 
@@ -120,29 +121,25 @@ export function makeTodoItemRow(item, index, statusClassArr, todoItems, setTodoI
         tag: "button",
     });
     editButton.addEventListener("click", () => {
-        handleEdit();
-    });
-
-    const handleEdit = () => {
-        const isSpan = commentCell.querySelector("span");
-        if (isSpan) {
-            const input = document.createElement("input");
-            input.value = commentText.textContent;
-            input.classList.add("comment_text");
-            input.maxLength = "100";
-            input.placeholder = "할일을 입력하세요";
-
-            commentCell.removeChild(commentText);
-            commentCell.appendChild(input);
-            input.focus();
-
-            input.addEventListener("blur", () => {
-                commentText.textContent = input.value;
-                commentCell.removeChild(input);
-                commentCell.appendChild(commentText);
-            });
+        const isDiabled = commentText.disabled;
+        commentText.disabled = !commentText.disabled;
+       
+        if (isDiabled) {
+        commentText.focus();
+        editButton.classList.add("complete");
         }
-    }
+        if (!isDiabled) {
+        todoItems[index].TaskName = commentText.value;
+        editButton.classList.remove("complete");
+        }
+    });
+    commentText.addEventListener("keydown", (e) => {
+        if (e.key === "Enter") {
+          commentText.disabled = true;
+          todoItems[index].TaskName = commentText.value;
+          editButton.classList.remove("complete");
+        }
+      });
 
     const removeCell = createElementWithClass({
         tag: "td",
